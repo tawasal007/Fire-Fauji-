@@ -1,0 +1,66 @@
+#include <WiFi.h>
+
+const char* ssid = "FireFauji";
+const char* password = "your_password_here";
+
+void setup() {
+  Serial.begin(115200);
+  delay(2000);
+
+  Serial.println();
+  Serial.println("=================================");
+  Serial.println("ESP-CAM MAC / IP CHECKER");
+  Serial.println("=================================");
+
+  WiFi.mode(WIFI_STA);
+
+  Serial.print("STA MAC for ESP-NOW: ");
+  Serial.println(WiFi.macAddress());
+
+  Serial.print("AP MAC: ");
+  Serial.println(WiFi.softAPmacAddress());
+
+  Serial.println();
+  Serial.print("Connecting to hotspot: ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+
+  int tries = 0;
+  while (WiFi.status() != WL_CONNECTED && tries < 30) {
+    delay(500);
+    Serial.print(".");
+    tries++;
+  }
+
+  Serial.println();
+
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("✅ WiFi connected!");
+
+    Serial.print("ESP-CAM IP: ");
+    Serial.println(WiFi.localIP());
+
+    Serial.print("Gateway / Laptop hotspot IP: ");
+    Serial.println(WiFi.gatewayIP());
+
+    Serial.print("Subnet Mask: ");
+    Serial.println(WiFi.subnetMask());
+
+    Serial.print("WiFi Channel: ");
+    Serial.println(WiFi.channel());
+
+    Serial.print("Use this MAC in Gatekeeper ESP-NOW code: ");
+    Serial.println(WiFi.macAddress());
+  } 
+  else {
+    Serial.println("❌ WiFi connection failed!");
+    Serial.println("Check hotspot name/password.");
+  }
+
+  Serial.println("=================================");
+}
+
+void loop() {
+  // Nothing needed
+}
