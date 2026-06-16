@@ -4,6 +4,9 @@ This document provides a comprehensive overview of the **Fire Fauji** autonomous
 
 ---
 
+Link for trained yolo model: 
+ https://drive.google.com/file/d/1emzdoHEfSOeEKVqNHjEB5VSbxJVfYS8O/view?usp=drive_link
+
 ## 🏗️ System Architecture
 
 The project is distributed across four main components: three microcontrollers (two ESP32-CAMs and one standard ESP32) and one central Python Dashboard running on a PC.
